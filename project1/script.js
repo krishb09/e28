@@ -3,20 +3,51 @@
 // Use at least 1 component.
 // There should be some aspect of dynamic styling (e.g. winning message in green, losing message in red) and this should be accomplished using class binding.
 
+
+//creating component
+Vue.component('round-detail', {
+    //component that will be globally available
+    //data option returns its data 
+    data: function () {
+        return {}
+    },
+
+    props: {
+        'number': {
+            type: Number,
+            default: 0
+        },
+        'winner': {
+            type: String,
+            default: ''
+        }
+    },
+    //display the component 
+    template: '#round-detail',
+
+});
+
 let app = new Vue({
     //initializing new instance of Vue
     // Options
     el: '#app',
     data: {
         words: [
-            ['crunchy leaves', '_ _ _ _ _ _ _-_ _ _ _ _ _ ', 'Jumping around on these fallen on the ground in fall'],
-            ['pumpkin pie', '_ _ _ _ _ _ _-_ _ _', 'Hands-down the BEST thanksgiving dessert'],
+            ['crunchy leaves', '_ _ _ _ _ _ _   _ _ _ _ _ _ ', 'Jumping around on these fallen on the ground in fall'],
+            ['pumpkin pie', '_ _ _ _ _ _ _   _ _ _', 'Hands-down the BEST thanksgiving dessert'],
             ['halloween-town', '_ _ _ _ _ _ _ _ _-_ _ _ _', 'A classic halloween movie from your childhood'],
             ['apple-picking', '_ _ _ _ _-_ _ _ _ _ _ _', 'Going to the orchard in the fall to do this activity'],
-            ['chai latte', '_ _ _ _-_ _ _ _ _', 'NOT a pumpkin spice latte but...'],
+            ['chai latte', '_ _ _ _   _ _ _ _ _', 'NOT a pumpkin spice latte but...'],
             ['corn-maze', '_ _ _ _-_ _ _ _', 'It would not be fun getting lost in one of these!']
         ],
-        wins: 0,
+        styleObjectLose: {
+            color: 'red',
+        },
+        styleObjectWin: {
+            color: 'green',
+        },
+        playerScore: 0,
+        compScore: 0,
         name: '',
         gameMode: 'start',
         wordHint: '',
@@ -66,6 +97,8 @@ let app = new Vue({
         resetRound() {
 
             this.rounds = [];
+            this.playerScore = 0;
+            this.compScore = 0;
 
         }
 

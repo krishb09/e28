@@ -19,11 +19,29 @@ body {
 
 }
 
-div.a {
-    width: 150px; 
-    border: 1px solid #000000;
-    word-wrap: break-word;
-  }
+
+.container {
+    width: 100%;
+    height: auto;
+
+    /*add flexbox*/
+
+   display : flex;
+   flex-direction : row ;
+   justify-content : space-around;
+   flex-flow : wrap;
+}
+
+.box {
+    width: 20%; 
+    height: 200px; 
+    margin: 20px; 
+    background: #D3D3D3;
+    box-sizing: border-box;
+    border: 3px solid; 
+    font-size: 10px; 
+
+}
 
 #guess {
     font-family: "Arial Black", Gadget, sans-serif;

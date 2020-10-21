@@ -2,7 +2,7 @@
 <html lang='en'>
 
 <head>
-    <title>Project </title>
+    <title>Project 1</title>
     <meta charset='utf-8'>
     <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
     <link rel="stylesheet" href="style.css">
@@ -32,10 +32,9 @@
             <p id="rule">Your mystery word length is: <span class='mysteryWord'>{{ wordLength }}</span></p>
             <p id="rule">Hint: <em>{{ wordHint }}</em></p>
 
-
-            <label for='guess'>Your guess: </label>
-            <input type='text' id='guess' v-model.trim='guess'>
-            <button id='guess' @click='submitUserGuess' @keyup.enter='submitUserGuess'>Submit guess</button>
+            <label for='userGuess'>Your guess: </label>
+            <input type='text' id='userGuess' v-model.trim='userGuess'>
+            <button id='userGuess' @click='submitUserGuess' @keyup.enter='submitUserGuess'>Submit guess</button>
 
             <div class="container">
                 <div id="rule" class="box">Score:
@@ -44,29 +43,26 @@
                         <p>Computer Score: {{compScore}} </p>
                     </ul>
                 </div>
-                <div id="rule" class="box">History of game:</div>
+                <div id="rule" class="box">History of game:
+                    <round-detail v-for='round in rounds' v-bind:key='round.number' v-bind:round='round'></round-detail>
+                </div>
             </div>
             <div class="boxReset"><button @click='resetRound'>Reset Scores</button></div>
+
         </div>
 
 
         <div v-if='feedback' class='feedback' :class="{ pass : correct, fail: !correct }">
             <div v-if='correct'>
-                <div v-bind:style="styleObjectWin">Correct! </div><button @click='loadGame'>Play again</button>
+                <div v-bind:style="styleObjectWin">Correct! </div><button class="buttonPlay" @click='loadGame'>Play
+                    again</button>
             </div>
             <div v-else>
-                <div v-bind:style="styleObjectLose">Sorry, that’s not correct. Play again.</div><button
-                    @click='loadGame'>Play again</button>
+                <div v-bind:style="styleObjectLose">WHOOPS! That's incorrect. Play again.</div><button
+                    class="buttonPlay" @click='loadGame'>Play again</button>
             </div>
         </div>
-
-        <round-detail v-for='round in rounds' @delete-round='deleteRound($event)' :number='round.number'
-            :winner='round.winner' :key='round.number'>
-
-        </round-detail>
     </div>
-
 </body>
-
 
 </html>

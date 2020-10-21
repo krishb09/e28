@@ -1,3 +1,4 @@
+/*Project 1 guideline*/
 // Keep track of a) a running score and b) results of each round of the game played.
 // Provide the option to reset the score and results.
 // Use at least 1 component.
@@ -9,21 +10,13 @@ Vue.component('round-detail', {
     //component that will be globally available
     //data option returns its data 
     data: function () {
-        return {}
-    },
-
-    props: {
-        'number': {
-            type: Number,
-            default: 0
-        },
-        'winner': {
-            type: String,
-            default: ''
+        return {
         }
     },
-    //display the component 
-    template: '#round-detail',
+    //attributes 
+    props: ['round'],
+    //display the second element of the rounds[] so use index '1'
+    template: `<ul><li>{{round[1]}}</li></ul>`,
 
 });
 
@@ -46,63 +39,70 @@ let app = new Vue({
         styleObjectWin: {
             color: 'green',
         },
+        winner: '',
         playerScore: 0,
         compScore: 0,
         name: '',
         gameMode: 'start',
         wordHint: '',
-        guess: '',
+        userGuess: '',
         rounds: [],
-        round: 1,
+        round: 0,
         word: '',
         lastWord: '',
         feedback: false,
         correct: false,
-        compGuess: '',
         wordLength: '',
 
     },
     methods: {
         submitUserGuess() {
-            this.correct = this.guess == this.word;
+            this.correct = this.userGuess == this.word;
             this.feedback = true;
+            this.round++;
+
+
+            //check if the guess matches the computer generated word and allot points accordingly
+            //increment each round and check who wins each round
+            if (this.word === this.userGuess) {
+                this.playerScore++;
+                this.winner = 'Player';
+                this.rounds.push([this.round, 'Player won round ' + this.round + '!']);
+            } else {
+                this.compScore++;
+                this.winner = 'Computer';
+                this.rounds.push([this.round, 'Computer won round ' + this.round + '!']);
+            }
         },
         startGame() {
             this.gameMode = 'play';
             this.loadGame();
-        },
 
-        deleteRound(roundNumber) {
-            console.log('Delete Round');
-            function checkRound(round) {
-                return round.number != this;
-            }
-            this.rounds = this.rounds.filter(checkRound, roundNumber);
         },
-
         loadGame() {
             this.feedback = false;
-            this.guess = '';
+            this.userGuess = '';
 
             if (this.word === this.lastWord) {
+                //randomly generating the word to be displayed
                 this.choice = this.words[Math.floor(Math.random() * this.words.length)];
+                //grabbing each element from the words array to display to user
                 this.word = this.choice[0];
                 this.wordLength = this.choice[1]
                 this.wordHint = this.choice[2];
             }
-
             this.lastWord = this.word;
         },
-
         resetRound() {
-
+            //reset all rounds and player/comp scores
+            this.round = 0;
             this.rounds = [];
+            this.userGuess = '';
+            this.word = '';
             this.playerScore = 0;
             this.compScore = 0;
+            this.winner = '';
 
         }
-
-
     },
-
 });

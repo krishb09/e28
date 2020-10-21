@@ -7,6 +7,8 @@
 
 ## Outside resources
 
+Image source of the 'mystic ball' from Google. 
+
 Helpful links I used: 
 
 https://www.raymondcamden.com/2019/08/12/working-with-the-keyboard-in-your-vue-app  
@@ -19,13 +21,13 @@ https://stackoverflow.com/questions/36970062/vue-js-document-getelementbyid-shor
 
 https://www.youtube.com/watch?v=0SktamdLLAQ 
 
+https://www.w3schools.com/css/css3_buttons.asp
+
 
 ## Notes for instructor
 
-Hi Professor Susan, 
-
-Just wanted to make a note that for some reason my p1 files weren't updating/the Vue instance wasn't running when I opened up the Vue console-
-I couldn't figure out why so I just created a different folder 'project1' and transferred all my work into there. 
+Wanted to make a note that for some reason my p1 files weren't updating/the Vue instance wasn't running when I opened up the Vue console- as
+I couldn't figure out why I just created a different folder 'project1' and transferred all my work into there. 
 
 
 

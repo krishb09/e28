@@ -1,5 +1,4 @@
 body {
-    
     background-color: #cc99ff;
     padding: 70px 0;
     font-family: "Arial Black", Gadget, sans-serif;
@@ -12,14 +11,11 @@ body {
     font-size: 25px;
 
 }
-
 #name {
     font-family: "Arial Black", Gadget, sans-serif;
     font-size: 20px;
 
 }
-
-
 .container {
     width: 100%;
     height: auto;
@@ -31,10 +27,19 @@ body {
    justify-content : space-around;
    flex-flow : wrap;
 }
-
+.buttonPlay {
+    background-color: #555555; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 .box {
     width: 20%; 
-    height: 200px; 
+    height: 600px; 
     margin: 20px; 
     background: #D3D3D3;
     box-sizing: border-box;
@@ -42,12 +47,10 @@ body {
     font-size: 10px; 
 
 }
-
-#guess {
+#userGuess {
     font-family: "Arial Black", Gadget, sans-serif;
     font-size: 20px;
 }
-
 img{
     border-radius: 120%;
 }

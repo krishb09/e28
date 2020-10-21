@@ -2,7 +2,7 @@
 # Project 1
 
 * By: Krishti Bhowmick 
-* Production URL: http://e28p1.krishbhes.me 
+* Production URL: http://e28project1.krishbhes.me/
 
 
 ## Outside resources

@@ -5,13 +5,49 @@
     <title>Project 1</title>
     <meta charset='utf-8'>
     <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script src='p1.js' defer></script>
 </head>
 
 <body>
-    <div id="app"></div>
-    <p>
-        Project 1 stuff
-    </p>
+    <h2>
+        Mystery Word Game
+    </h2>
+    <div id="app" v-cloak>
+        <img src="mysticball.jpg" width="300" height="400">
+
+        <div v-if='gameMode == "start"'>
+            <label for='name'>Enter your name:</label>
+            <input type='text' id='name' v-model='name' @keyup.enter='startGame'>
+            <button @click='startGame'>Start Game!</button>
+        </div>
+        <p id="rule"> Enter any letter to guess the word</p>
+
+        <p id="rule"> If you guess the word correctly, you win!</p>
+        <div v-if='gameMode == "play"'>
+            <p>Game on, {{ name }}!</p>
+
+            <p>Your mystery word is: <span class='mysteryWord'>{{ appGuess }}</span></p>
+
+            <p>Hint: <em>{{ hint }}</em></p>
+
+            <label for='guess'>Your guess: </label>
+            <input type='text' id='guess' v-model.trim='guess'>
+            <button @click='submitGuess' @keyup.enter='submitGuess'>Submit guess</button>
+        </div>
+
+
+
+
+        <round-detail v-for='round in rounds' @delete-round='deleteRound($event)' :number='round.number'
+            :winner='round.winner' :key='round.number'>
+
+
+        </round-detail>
+    </div>
+
 </body>
+
 
 </html>

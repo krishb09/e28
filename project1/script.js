@@ -86,7 +86,7 @@ let app = new Vue({
             if (this.word === this.lastWord) {
                 //randomly generating the word to be displayed
                 this.choice = this.words[Math.floor(Math.random() * this.words.length)];
-                //grabbing each element from the words array to display to user
+                //grabbing each element from the words array to display to
                 this.word = this.choice[0];
                 this.wordLength = this.choice[1]
                 this.wordHint = this.choice[2];

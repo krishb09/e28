@@ -16,23 +16,18 @@
         </li>
       </ul>
     </nav>
-    <router-view></router-view>
-
-    <home-page v-if="page == 'home'"></home-page>
-    <products-page v-if="page == 'products'"></products-page>
-    <categories-page v-else-if="page == 'categories'"></categories-page>
+    <router-view v-bind:products="products"></router-view>
   </div>
 </template>
 
 <script>
-import HomePage from "@/components/pages/HomePage.vue";
-import ProductsPage from "@/components/pages/ProductsPage.vue";
-import CategoriesPage from "@/components/pages/CategoriesPage.vue";
+import { axios } from "@/app.js";
 
 export default {
   name: "App",
   data() {
     return {
+      products: [],
       /* Store links in an array to maintain order */
       links: ["home", "products", "categories"],
 
@@ -44,10 +39,11 @@ export default {
       },
     };
   },
-  components: {
-    "home-page": HomePage,
-    "products-page": ProductsPage,
-    "categories-page": CategoriesPage,
+  mounted() {
+    axios.get("/product").then((response) => {
+      this.products = response.data.product;
+      console.log(response.data);
+    });
   },
 };
 </script>

@@ -12,13 +12,13 @@ Vue.config.productionTip = false
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+  mode: 'history',
   routes: [
     { path: '/', component: HomePage },
     { path: '/products', component: ProductsPage },
     { path: '/categories', component: CategoriesPage },
     { path: '/products/:id', component: ProductPage, props: true },
   ],
-  mode: 'history',
 })
 
 new Vue({

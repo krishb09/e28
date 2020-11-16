@@ -1,28 +1,70 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- Added to the App.vue template -->
+    <div>
+      <b-card
+        title="Plant-Based Eats"
+        body-class="text-center"
+        header-tag="nav"
+      >
+        <img src="@/assets/images/avo.jpg" img-alt="Image" img-top />
+
+        <template #header>
+          <div class="text center">
+            <nav>
+              <router-link
+                v-for="link in links"
+                v-bind:key="link"
+                v-bind:to="paths[link]"
+                exact
+                >{{ link }} <span></span>
+              </router-link>
+            </nav>
+          </div>
+          <router-view v-bind:RECIPES="RECIPES"></router-view>
+        </template>
+      </b-card>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import { axios } from "@/app.js";
+import Vue from "vue";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
+// Install BootstrapVue
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+
+  data() {
+    return {
+      RECIPES: [],
+      /* Store links in an array to maintain order */
+      links: ["HOME", "RECIPES", "FAVORITES"],
+
+      /* Map links to the appropriate component */
+      paths: {
+        HOME: "/",
+        RECIPES: "/recipes",
+        FAVORITES: "/favorites",
+      },
+    };
+  },
+  // mounted() {
+  //   axios.get("/recipe").then((response) => {
+  //     this.recipeList = response.data.recipe;
+  //     console.log(response.data);
+  //   });
+  // },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang='scss'>
 </style>
+

@@ -17,7 +17,11 @@ List the SFCs of your application
 List the features in your application that are persisting and retrieving data from the server
 
 ## Outside resources
-Your list of outside resources go here
+* https://stackoverflow.com/questions/52022541/export-addplacemodal-was-not-found-in-components-addplacemodal-vue  
+
+* https://bootstrap-vue.org/docs/components/card 
+
+* https://michaelnthiessen.com/solve-unknown-custom-element-vue/
 
 ## Notes for instructor
 

@@ -8,24 +8,22 @@
       v-bind:to="'/recipes/' + recipe.id"
       exact
     >
-      <show-recipe :recipe="recipe" :includeDetails="false"></show-recipe
+      <show-recipe :recipe="recipe"></show-recipe
     ></router-link>
   </div>
 </template>
 
 <script>
 import ShowRecipe from "@/components/ShowRecipe.vue";
-import { recipeList } from "@/recipe.js";
 
 export default {
   name: "",
   components: {
     "show-recipe": ShowRecipe,
   },
+  props: ["recipeList"],
   data: function () {
-    return {
-      recipeList: recipeList,
-    };
+    return {};
   },
 };
 </script>

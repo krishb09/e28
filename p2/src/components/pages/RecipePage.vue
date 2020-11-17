@@ -16,9 +16,10 @@
                 <div v-if="recipe">
                   <show-recipe
                     :recipe="recipe"
-                    :includeDetails="true"
+                    :includeIngredients="true"
                     :includeDescription="true"
                     :includeButton="true"
+                    :includeDirections="true"
                   >
                     ></show-recipe
                   >
@@ -34,18 +35,15 @@
 
 <script>
 import ShowRecipe from "@/components/ShowRecipe.vue";
-import { recipeList } from "@/recipe.js";
 
 export default {
   name: "",
-  props: ["id"],
+  props: ["id", "recipeList"],
   components: {
     "show-recipe": ShowRecipe,
   },
   data() {
-    return {
-      recipeList: recipeList,
-    };
+    return {};
   },
   computed: {
     recipe() {

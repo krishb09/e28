@@ -4,13 +4,7 @@
     <div>
       <b-card no-body class="overflow-hidden" style="max-width: 540px">
         <b-row no-gutters>
-          <b-col md="6">
-            <img
-              :src="require('@/assets/images/' + recipe.id + '.png')"
-              alt="Image"
-              class="rounded-0"
-            />
-          </b-col>
+          <b-col md="6"> </b-col>
           <b-col md="6">
             <b-card-body>
               <b-card-text>

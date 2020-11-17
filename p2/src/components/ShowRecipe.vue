@@ -31,14 +31,12 @@ export default {
     "includeDirections",
   ],
   data: function () {
-    return {
-      errors: null,
-      showConfirmationMessage: false,
-    };
+    return {};
   },
   methods: {
     addFavoriteRecipe() {
       axios.post("/favorite", this.recipe).then((response) => {
+        console.log(response.data.favorite);
         if (response.data.errors) {
           this.errors = response.data.errors;
         } else {

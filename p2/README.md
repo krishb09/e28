@@ -1,7 +1,7 @@
 # Project2 
 
 * By: Krishti Bhowmick 
-* Production URL: http://e28p2.yourdomain.com
+* Production URL: http://recipe.krishbhes.me
 
 
 ## Pages summary

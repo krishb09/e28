@@ -65,6 +65,18 @@ export default {
         this.recipeList = response.data.recipe;
       });
     },
+    getFavorites() {
+      axios.get("/favorite").then((response) => {
+        console.log(response.data.favorite);
+        this.favorite = response.data.favorite.recipe_id;
+        if (response.data.errors) {
+          this.errors = response.data.errors;
+        } else {
+          this.$emit("get-favorites");
+          this.showConfirmationMessage = true;
+        }
+      });
+    },
   },
   mounted() {
     this.updateRecipes();

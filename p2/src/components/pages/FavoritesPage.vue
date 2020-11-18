@@ -2,40 +2,29 @@
   <div id="favorites-page">
     <h2>Favorites</h2>
     <div>
-      <b-card no-body class="overflow-hidden" style="max-width: 540px">
-        <b-row no-gutters>
-          <b-col md="6"> </b-col>
-          <b-col md="6">
-            <b-card-body>
-              <b-card-text>
-                <router-link
-                  v-for="recipe in recipeList"
-                  :key="recipe.id"
-                  v-bind:to="'/recipes/' + recipe.id"
-                  exact
-                >
-                  <show-recipe :recipe="recipe"></show-recipe
-                ></router-link>
-              </b-card-text>
-            </b-card-body>
-          </b-col>
-        </b-row>
-      </b-card>
+      <b-card-text> Page coming soon! </b-card-text>
     </div>
   </div>
 </template>
 
 <script>
-import ShowRecipe from "@/components/ShowRecipe.vue";
+// import ShowRecipe from "@/components/ShowRecipe.vue";
 
 export default {
   name: "",
-  components: {
-    "show-recipe": ShowRecipe,
-  },
-  props: ["id", "recipeList"],
+  props: ["id", "recipeList", "favorites"],
+  // components: {
+  //   "show-recipe": ShowRecipe,
+  // },
   data() {
     return {};
+  },
+  computed: {
+    recipe() {
+      return this.recipeList.filter((recipe) => {
+        return recipe.id == this.id;
+      }, this.id)[0];
+    },
   },
 };
 </script>

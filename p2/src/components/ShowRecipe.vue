@@ -15,6 +15,7 @@
     <b-button @click="addFavoriteRecipe" v-if="includeButton" variant="success"
       >Add to Favorites</b-button
     >
+    <div v-if="showConfirmationMessage">Successfully added to favorites!</div>
   </div>
 </template>
 
@@ -31,19 +32,32 @@ export default {
     "includeDirections",
   ],
   data: function () {
-    return {};
+    return {
+      errors: null,
+      showConfirmationMessage: false,
+      favorite: {
+        name: "",
+        recipe_id: this.recipe.id,
+      },
+    };
   },
   methods: {
     addFavoriteRecipe() {
-      axios.post("/favorite", this.recipe).then((response) => {
-        console.log(response.data.favorite);
-        if (response.data.errors) {
-          this.errors = response.data.errors;
-        } else {
-          this.$emit("update-recipes");
-          this.showConfirmationMessage = true;
-        }
-      });
+      axios
+        .post("/favorite", {
+          recipe_id: this.recipe.id,
+          name: this.recipe.name,
+        })
+        .then((response) => {
+          console.log(response.data.favorite.name);
+          if (response.data.errors) {
+            this.errors = response.data.errors;
+          } else {
+            this.favorite.name = "";
+            this.showConfirmationMessage = true;
+            this.$emit("update-recipes");
+          }
+        });
     },
   },
 };

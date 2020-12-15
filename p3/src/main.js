@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+import store from '@/common/store';
 
 
 import HomePage from "@/components/pages/HomePage.vue";
@@ -21,13 +22,15 @@ const router = new VueRouter({
     { path: '/', component: HomePage },
     { path: '/recipes', component: ShowRecipes },
     { path: '/favorites', component: FavoritesPage },
-    { path: '/recipes/:id', component: RecipePage, props: true },
     { path: '/recipes/new', component: AddRecipePage },
+    { path: '/recipes/:id', component: RecipePage, props: true },
   ],
 })
 
 
 new Vue({
-  router: router, // <-- NEW
+  //will add store instance to all child components making it accessible with > this.$store 
+  store: store,
+  router: router,
   render: h => h(App),
 }).$mount('#app')

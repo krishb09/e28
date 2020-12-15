@@ -21,10 +21,7 @@
               </router-link>
             </nav>
           </div>
-          <router-view
-            v-bind:recipeList="recipeList"
-            v-on:update-recipes="updateRecipes()"
-          ></router-view>
+          <router-view> </router-view>
         </template>
       </b-card>
     </div>
@@ -32,7 +29,6 @@
 </template>
 
 <script>
-import { axios } from "@/app.js";
 import Vue from "vue";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
@@ -60,27 +56,14 @@ export default {
       },
     };
   },
-  methods: {
-    updateRecipes() {
-      axios.get("/recipe").then((response) => {
-        this.recipeList = response.data.recipe;
-      });
-    },
-    getFavorites() {
-      axios.get("/favorite").then((response) => {
-        console.log(response.data.favorite);
-        this.favorite = response.data.favorite.recipe_id;
-        if (response.data.errors) {
-          this.errors = response.data.errors;
-        } else {
-          this.$emit("get-favorites");
-          this.showConfirmationMessage = true;
-        }
-      });
-    },
-  },
   mounted() {
-    this.updateRecipes();
+    this.$store.dispatch("fetchRecipes");
+  },
+
+  computed: {
+    recipes() {
+      return this.$store.state.recipes;
+    },
   },
 };
 </script>

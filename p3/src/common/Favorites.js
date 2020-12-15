@@ -6,12 +6,12 @@ export default class Favorites {
         // Extract JSON cart string from local storage
         let favorite = localStorage.getItem("favorite");
 
-        // Parse JSON cart String to `items` object
+        // Parse JSON cart String to `favorites` object
         this.favorites = (favorite) ? JSON.parse(favorite) : [];
     }
 
     /**
-     * Getter method for items
+     * Getter method 
      */
     getFavorites() {
         return this.favorites;
@@ -25,18 +25,32 @@ export default class Favorites {
     }
 
     /**
+ * Returns how many total items are in the cart
+ */
+    count() {
+        let sum = 0;
+        for (let key of Object.keys(this.favorites)) {
+            sum += this.favorites[key].quantity;
+        }
+        return sum;
+    }
+
+    /**
      * Add a new item of the given id
      */
-    add(id) {
-        // First see if product is already present
+    add(id, quantity = 1, name) {
+        // check if already present
         let item = this.getItem(id);
 
         if (item) {
-            console.log("already added");
+            item.quantity += quantity;
         } else {
-            // Product not in cart, add as new item
+            // not a favorite, add it
             this.favorites.push({
                 id: id,
+                quantity: quantity,
+                name: name,
+
             });
         }
 
@@ -49,17 +63,16 @@ export default class Favorites {
     remove(id) {
         let item = this.getItem(id);
 
-        let itemIndex = this.items.indexOf(item);
+        let itemIndex = this.favorites.indexOf(item);
 
         if (item) {
-            this.items.splice(itemIndex, 1);
+            this.favorites.splice(itemIndex, 1);
             this.update();
         }
     }
 
     /**
      * Get an item from items via id
-     * Returns null if product does not exist in items
      */
     getItem(recipeId) {
         return this.favorites.find(({ id }) => id === recipeId) || null;

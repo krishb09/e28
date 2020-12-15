@@ -38,7 +38,7 @@ import ShowRecipe from "@/components/ShowRecipe.vue";
 
 export default {
   name: "",
-  props: ["id", "recipeList"],
+  props: ["id"],
   components: {
     "show-recipe": ShowRecipe,
   },
@@ -47,9 +47,7 @@ export default {
   },
   computed: {
     recipe() {
-      return this.recipeList.filter((recipe) => {
-        return recipe.id == this.id;
-      }, this.id)[0];
+      return this.$store.getters.getRecipeById(this.id);
     },
   },
 };

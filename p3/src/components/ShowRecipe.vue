@@ -12,16 +12,26 @@
     <p class="recipe-directions" v-if="includeDirections">
       {{ recipe.directions }}
     </p>
-    <b-button @click="addFavoriteRecipe" v-if="includeButton" variant="success"
+    <b-button
+      @click="addFavoriteRecipe"
+      v-if="includeButton"
+      variant="outline-primary"
       >Add to Favorites</b-button
     >
-    <div v-if="showConfirmationMessage">Successfully added to favorites!</div>
+    <transition name="fade">
+      <div
+        data-test="add-to-favorites-confirmation"
+        class="alert"
+        v-if="addAlert"
+      >
+        <b-alert variant="success" show>New favorite added!</b-alert>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
-import { axios } from "@/app.js";
-// import { favorites } from "@/app.js";
+import { favorites } from "@/app.js";
 
 export default {
   name: "show-recipe",
@@ -35,7 +45,7 @@ export default {
   data: function () {
     return {
       errors: null,
-      showConfirmationMessage: false,
+      addAlert: false,
       favorite: {
         name: "",
         recipe_id: this.recipe.id,
@@ -44,22 +54,12 @@ export default {
   },
   methods: {
     addFavoriteRecipe() {
-      axios
-        .post("/favorite", {
-          recipe_id: this.recipe.id,
-          name: this.recipe.name,
-        })
-        .then((response) => {
-          console.log(response.data.favorite.name);
-          if (response.data.errors) {
-            this.errors = response.data.errors;
-          } else {
-            this.favorite.name = "";
-            this.showConfirmationMessage = true;
-            this.$emit("update-recipes");
-          }
-        });
-      // favorites.add(this.recipe_id);
+      console.log(this.recipe.name);
+      favorites.add(this.recipe.id, 1);
+
+      this.addAlert = true;
+
+      setTimeout(() => (this.addAlert = false), 2000);
     },
   },
 };

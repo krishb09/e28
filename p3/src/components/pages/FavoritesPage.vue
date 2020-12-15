@@ -1,29 +1,58 @@
 <template>
   <div id="favorites-page">
     <h2>Favorites</h2>
-    <div>
-      <b-card-text> Page coming soon! </b-card-text>
+
+    <div v-if="favoritesList.length == 0">
+      <b-alert show variant="danger">Empty!</b-alert>
+    </div>
+
+    <div class="cleanList" v-if="productsLoaded">
+      <p v-for="favorite in favoritesList" :key="favorite.id">
+        You added {{ favorite.quantity }} of
+        {{ getFavoritesDetails(favorite.id).name }}
+
+        <b-button
+          @click="removeFavorite(favorite.id)"
+          variant="danger"
+          size="sm"
+          >Remove</b-button
+        >
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-// import ShowRecipe from "@/components/ShowRecipe.vue";
+import { favorites } from "@/app.js";
 
 export default {
   name: "",
-  props: ["id", "recipeList", "favorites"],
-  // components: {
-  //   "show-recipe": ShowRecipe,
-  // },
+  props: [],
+
   data() {
-    return {};
+    return {
+      favoritesList: [],
+    };
+  },
+  mounted() {
+    this.favoritesList = favorites.getFavorites();
   },
   computed: {
-    recipe() {
-      return this.recipeList.filter((recipe) => {
-        return recipe.id == this.id;
-      }, this.id)[0];
+    productsLoaded() {
+      return this.recipes.length > 0;
+    },
+    recipes() {
+      return this.$store.state.recipes;
+    },
+  },
+  methods: {
+    getFavoritesDetails(id) {
+      return this.recipes.filter((recipe) => {
+        return recipe.id == id;
+      }, id)[0];
+    },
+    removeFavorite(id) {
+      favorites.remove(id);
     },
   },
 };

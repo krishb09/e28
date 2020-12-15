@@ -3,7 +3,6 @@ export default class Favorites {
      *
      */
     constructor() {
-        // Extract JSON cart string from local storage
         let favorite = localStorage.getItem("favorite");
 
         // Parse JSON cart String to `favorites` object
@@ -24,16 +23,6 @@ export default class Favorites {
         localStorage.setItem("favorite", JSON.stringify(this.favorites));
     }
 
-    /**
- * Returns how many total items are in the cart
- */
-    count() {
-        let sum = 0;
-        for (let key of Object.keys(this.favorites)) {
-            sum += this.favorites[key].quantity;
-        }
-        return sum;
-    }
 
     /**
      * Add a new item of the given id

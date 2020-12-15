@@ -2,6 +2,8 @@
 <template>
   <div id="recipes">
     <h2>Recipes</h2>
+
+    <p></p>
     <router-link
       v-for="recipe in recipes"
       :key="recipe.id"

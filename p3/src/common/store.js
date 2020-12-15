@@ -16,7 +16,10 @@ export default new Vuex.Store({
     mutations: {
         setRecipes(state, payload) {
             state.recipes = payload;
-        }
+        },
+        setUser(state, payload) {
+            state.user = payload;
+        },
     },
 
     //data entity managed by vuex

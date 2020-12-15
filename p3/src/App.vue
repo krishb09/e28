@@ -58,6 +58,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchRecipes");
+    this.$store.dispatch("authUser");
   },
 
   computed: {

@@ -8,8 +8,8 @@
 
     <div class="cleanList" v-if="productsLoaded">
       <p v-for="favorite in favoritesList" :key="favorite.id">
-        You added {{ favorite.quantity }} of
-        {{ getFavoritesDetails(favorite.id).name }}
+        You added
+        {{ getFavoritesDetails(favorite.id).name }} to favorites
 
         <b-button
           @click="removeFavorite(favorite.id)"

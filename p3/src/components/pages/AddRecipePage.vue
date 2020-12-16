@@ -170,45 +170,45 @@
 
               <h3>Register here first!</h3>
               <div>
-                <label for="name2"
+                <label for="name"
                   >Name:
                   <input
                     type="text"
                     data-test="nameRegister-input"
-                    v-model="newUserInputData.name2"
+                    v-model="newUserInputData.name"
                     v-on:blur="validateRegister()"
                 /></label>
                 <error-field
-                  v-if="errors && 'name2' in errors"
-                  :errors="errors.name2"
+                  v-if="errors && 'name' in errors"
+                  :errors="errors.name"
                 ></error-field>
               </div>
               <div>
-                <label for="email2"
+                <label for="email"
                   >Email:
                   <input
                     type="text"
                     data-test="emailRegister-input"
-                    v-model="newUserInputData.email2"
+                    v-model="newUserInputData.email"
                     v-on:blur="validateRegister()"
                 /></label>
                 <error-field
-                  v-if="errors && 'email2' in errors"
-                  :errors="errors.email2"
+                  v-if="errors && 'email' in errors"
+                  :errors="errors.email"
                 ></error-field>
               </div>
               <div>
-                <label for="password2"
+                <label for="password"
                   >Password:
                   <input
                     type="password"
                     data-test="passwordRegister-input"
-                    v-model="newUserInputData.password2"
+                    v-model="newUserInputData.password"
                     v-on:blur="validateRegister()"
                 /></label>
                 <error-field
-                  v-if="errors && 'password2' in errors"
-                  :errors="errors.password2"
+                  v-if="errors && 'password' in errors"
+                  :errors="errors.password"
                 ></error-field>
               </div>
               <b-button
@@ -267,9 +267,9 @@ export default {
         password: "",
       },
       newUserInputData: {
-        name2: "",
-        email2: "",
-        password2: "",
+        name: "",
+        email: "",
+        password: "",
       },
     };
   },
@@ -307,9 +307,9 @@ export default {
     },
     validateRegister() {
       let validator = new Validator(this.recipe, {
-        name2: "required",
-        email2: "required",
-        password2: "required",
+        name: "required",
+        email: "required",
+        password: "required",
       });
       if (validator.fails()) {
         this.errors = validator.errors.all();
@@ -376,9 +376,9 @@ export default {
         password: "",
       };
       this.newUserInputData = {
-        name2: "",
-        email2: "",
-        password2: "",
+        name: "",
+        email: "",
+        password: "",
       };
     },
   },

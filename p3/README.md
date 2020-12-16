@@ -8,7 +8,8 @@
 
 * Home
 * Recipes - list of recipes
-* Your Favorite Recipes - will be updated
+* Your Favorite Recipes - Able to see your favorite recipes!
+* Add A Recipe - add a new recipe to the app
 
 ## SFC summary
 The ShowRecipe component- it shows the info for one recipe - you can also add a recipe to your favorites! 
@@ -18,15 +19,14 @@ The ShowRecipe component- it shows the info for one recipe - you can also add a 
 * The app sends back a post request to the server persists data for new favorite added 
 
 ## Outside resources
-* https://stackoverflow.com/questions/52022541/export-addplacemodal-was-not-found-in-components-addplacemodal-vue  
+* https://vuejs.org/v2/cookbook/form-validation.html
 
 * https://bootstrap-vue.org/docs/components/card 
 
-* https://michaelnthiessen.com/solve-unknown-custom-element-vue/
+* https://stackoverflow.com/questions/16515421/whats-the-html-to-have-a-horizontal-space-between-two-objects/22097767
 
 ## Notes for instructor
 
-I was hoping to display the favorite that the user added- however I was struggling a bit with displaying them. Hope to have this feature done for Project 3. 
 
 
 

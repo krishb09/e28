@@ -70,7 +70,16 @@
           </div>
           <transition name="fade">
             <div
-              data-test="product-added-confirmation"
+              data-test="recipeFail-confirmation"
+              class="alert"
+              v-if="failRecipe"
+            >
+              <b-alert variant="danger" show>Fill all fields!</b-alert>
+            </div>
+          </transition>
+          <transition name="fade">
+            <div
+              data-test="recipe-added-confirmation"
               class="alert"
               v-if="showConfirmationMessage"
             >
@@ -96,7 +105,7 @@
               <div>
                 <h3>Login</h3>
                 <div>
-                  <label
+                  <label for="email"
                     >Email:
                     <input
                       type="text"
@@ -105,8 +114,13 @@
                       v-on:blur="validateLogin()"
                   /></label>
                 </div>
+                <error-field
+                  v-if="errors && 'email' in errors"
+                  :errors="errors.email"
+                ></error-field>
+
                 <div>
-                  <label
+                  <label for="password"
                     >Password:
                     <input
                       type="password"
@@ -115,6 +129,10 @@
                       v-on:blur="validateLogin()"
                   /></label>
                 </div>
+                <error-field
+                  v-if="errors && 'password' in errors"
+                  :errors="errors.password"
+                ></error-field>
 
                 <b-button
                   @click="login"
@@ -123,16 +141,17 @@
                 >
                   Login
                 </b-button>
-
-                <!-- <ul v-if="errors">
-                  <li
-                    class="error"
-                    v-for="(error, index) in errors"
-                    :key="index"
+                <transition name="fade">
+                  <div
+                    data-test="login-confirmation"
+                    class="alert"
+                    v-if="failLogin"
                   >
-                    {{ error }}
-                  </li>
-                </ul> -->
+                    <b-alert variant="danger" show
+                      >Cannot Login- try again!</b-alert
+                    >
+                  </div>
+                </transition>
               </div>
             </b-card-text>
           </b-col>
@@ -144,61 +163,46 @@
 
               <h3>Register here first!</h3>
               <div>
-                <label
+                <label for="name2"
                   >Name:
                   <input
                     type="text"
-                    data-test="name-input"
-                    v-model="newUserInputData.name"
+                    data-test="nameRegister-input"
+                    v-model="newUserInputData.name2"
                     v-on:blur="validateRegister()"
                 /></label>
-                <ul v-if="registerErrors">
-                  <li
-                    class="error"
-                    v-for="(error, index) in registerErrors.name"
-                    :key="index"
-                  >
-                    {{ error }}
-                  </li>
-                </ul>
+                <error-field
+                  v-if="errors && 'name2' in errors"
+                  :errors="errors.name2"
+                ></error-field>
               </div>
               <div>
-                <label
+                <label for="email2"
                   >Email:
                   <input
                     type="text"
-                    data-test="email-input"
-                    v-model="newUserInputData.email"
+                    data-test="emailRegister-input"
+                    v-model="newUserInputData.email2"
                     v-on:blur="validateRegister()"
                 /></label>
-                <ul v-if="registerErrors">
-                  <li
-                    class="error"
-                    v-for="(error, index) in registerErrors.email"
-                    :key="index"
-                  >
-                    {{ error }}
-                  </li>
-                </ul>
+                <error-field
+                  v-if="errors && 'email2' in errors"
+                  :errors="errors.email2"
+                ></error-field>
               </div>
               <div>
-                <label
+                <label for="password2"
                   >Password:
                   <input
                     type="password"
-                    data-test="password-input"
-                    v-model="newUserInputData.password"
+                    data-test="passwordRegister-input"
+                    v-model="newUserInputData.password2"
                     v-on:blur="validateRegister()"
                 /></label>
-                <ul v-if="registerErrors">
-                  <li
-                    class="error"
-                    v-for="(error, index) in registerErrors.password"
-                    :key="index"
-                  >
-                    {{ error }}
-                  </li>
-                </ul>
+                <error-field
+                  v-if="errors && 'password2' in errors"
+                  :errors="errors.password2"
+                ></error-field>
               </div>
               <b-button
                 @click="register"
@@ -207,6 +211,17 @@
               >
                 Register
               </b-button>
+              <transition name="fade">
+                <div
+                  data-test="register-confirmation"
+                  class="alert"
+                  v-if="failRegister"
+                >
+                  <b-alert variant="danger" show
+                    >Cannot Register- try again!</b-alert
+                  >
+                </div>
+              </transition>
             </b-card-text>
           </b-col>
         </b-row>
@@ -229,8 +244,11 @@ export default {
     return {
       errors: null,
       registerErrors: null,
-
       showConfirmationMessage: false,
+      failLogin: false,
+      failRegister: false,
+      failRecipe: false,
+
       recipe: {
         name: "",
         description: "",
@@ -242,9 +260,9 @@ export default {
         password: "",
       },
       newUserInputData: {
-        name: "",
-        email: "",
-        password: "",
+        name2: "",
+        email2: "",
+        password2: "",
       },
     };
   },
@@ -266,7 +284,6 @@ export default {
       } else {
         this.errors = null;
       }
-
       return validator.passes();
     },
     validateLogin() {
@@ -274,16 +291,25 @@ export default {
         email: "required",
         password: "required",
       });
-      this.errors = validator.errors.all();
+      if (validator.fails()) {
+        this.errors = validator.errors.all();
+      } else {
+        this.errors = null;
+      }
       return validator.passes();
     },
     validateRegister() {
       let validator = new Validator(this.recipe, {
-        name: "required",
-        email: "required",
-        password: "required",
+        name2: "required",
+        email2: "required",
+        password2: "required",
       });
-      this.errors = validator.errors.all();
+      if (validator.fails()) {
+        this.errors = validator.errors.all();
+      } else {
+        this.errors = null;
+      }
+
       return validator.passes();
     },
     addRecipes() {
@@ -291,6 +317,8 @@ export default {
       axios.post("/recipe", this.recipe).then((response) => {
         if (response.data.errors) {
           this.errors = response.data.errors;
+          this.failRecipe = true;
+          setTimeout(() => (this.failRecipe = false), 2000);
         } else {
           this.errors = null;
           this.showConfirmationMessage = true;
@@ -313,6 +341,8 @@ export default {
           console.log(response.data.user);
         } else {
           this.errors = response.data.errors;
+          this.failLogin = true;
+          setTimeout(() => (this.failLogin = false), 2000);
         }
       });
     },
@@ -320,6 +350,8 @@ export default {
       axios.post("register", this.newUserInputData).then((response) => {
         if (response.data.errors) {
           this.registerErrors = response.data.errors;
+          this.failRegister = true;
+          setTimeout(() => (this.failRegister = false), 2000);
         } else {
           this.$store.dispatch("authUser");
         }
@@ -335,6 +367,11 @@ export default {
       this.userInputData = {
         email: "",
         password: "",
+      };
+      this.newUserInputData = {
+        name2: "",
+        email2: "",
+        password2: "",
       };
     },
   },

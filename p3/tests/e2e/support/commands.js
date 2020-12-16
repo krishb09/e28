@@ -8,7 +8,7 @@ let user = {
 }
 
 Cypress.Commands.add('login', () => {
-    cy.visit('/account');
+    cy.visit('/recipes/new');
     cy.get('[data-test=email-input]').clear().type(user.email);
     cy.get('[data-test=password-input]').clear().type(user.password);
     cy.get('[data-test=login-button]').click();

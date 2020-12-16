@@ -27,6 +27,8 @@ The ShowRecipe component- it shows the info for one recipe - you can also add a 
 
 ## Notes for instructor
 
+* Tests: I was able to download cypress and run it- however it didn't pick up on the spec files. Tried deleting the testing files and re-installing cypress but still wasn't working- but I did write the tests as best as I could looking at class examples. Just wanted to make note of this glitch. 
+
 
 
 

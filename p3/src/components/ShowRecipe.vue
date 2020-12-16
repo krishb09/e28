@@ -1,8 +1,11 @@
 <!-- src/components/ShowRecipe.vue -->
 <template>
   <div class="recipe">
-    <div class="recipe-name">{{ recipe.name }}</div>
-    <img :src="require('@/assets/images/' + recipe.id + '.png')" />
+    <div class="recipe-name" data-test="recipe-name">{{ recipe.name }}</div>
+    <img
+      :data-test="'recipe-image-' + recipe.id"
+      :src="require('@/assets/images/' + recipe.id + '.png')"
+    />
     <p class="recipe-description" v-if="includeDescription">
       {{ recipe.description }}
     </p>

@@ -10,6 +10,7 @@
             <input
               type="text"
               v-model="recipe.name"
+              data-test="recipeName"
               id="name"
               v-on:blur="validateRecipe()"
             />
@@ -23,6 +24,7 @@
             <input
               type="text"
               v-model="recipe.description"
+              data-test="recipeDescription"
               id="description"
               v-on:blur="validateRecipe()"
             />
@@ -37,6 +39,7 @@
             <input
               type="text"
               v-model="recipe.ingredients"
+              data-test="recipeIngredients"
               id="ingredients"
               v-on:blur="validateRecipe()"
             />
@@ -51,6 +54,7 @@
             <input
               type="text"
               v-model="recipe.directions"
+              data-test="recipeDirections"
               id="directions"
               v-on:blur="validateRecipe()"
             />
@@ -64,7 +68,10 @@
               >New Recipe!</b-button
             >
             <span> </span>
-            <b-button @click="logout" variant="outline-primary"
+            <b-button
+              @click="logout"
+              variant="outline-primary"
+              data-test="logout-button"
               >Logout</b-button
             >
           </div>
